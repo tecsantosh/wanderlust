@@ -1,12 +1,15 @@
 version: "3.8"
 services:
   mongodb:
-     container_name: mongo
-     image: mongo:latest
-     volumes:
-       - ./backend/data:/data
-     ports:
-       - "27017:27017"
+    container_name: mongo
+    image: mongo:latest
+    volumes:
+      - ./backend/data:/data/db  # Ensure the data volume is accessible
+    ports:
+      - "27017:27017"
+    command: ["/bin/bash", "-c", "/data/mongo-init.sh"]  # Use the init script to check and import
+    volumes:
+      - ./backend/data:/data  # Mount the folder containing both the DB and sample data
 
   backend:
     container_name: backend
