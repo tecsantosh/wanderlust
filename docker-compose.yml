@@ -6,7 +6,7 @@ services:
      volumes:
       - /home/mongo_data:/data/db
       - ./data:/data  # Ensure the sample JSON file is accessible
-     command: bash -c "if mongo wanderlust --eval 'db.posts.countDocuments()' --quiet | grep -q '^0$'; then mongoimport --db wanderlust --collection posts --file /data/sample_posts.json --jsonArray; fi"
+     #command: bash -c "if mongo wanderlust --eval 'db.posts.countDocuments()' --quiet | grep -q '^0$'; then mongoimport --db wanderlust --collection posts --file /data/sample_posts.json --jsonArray; fi"
      ports:
        - "27017:27017"
 
