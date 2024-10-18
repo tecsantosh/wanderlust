@@ -4,7 +4,8 @@ services:
      container_name: mongo
      image: mongo:latest
      volumes:
-       - ./backend/data:/data
+       - /home/mongo_data:/data/db  # Store MongoDB data in /home/mongo_data on the host
+       #- ./backend/data:/data
      ports:
        - "27017:27017"
 
