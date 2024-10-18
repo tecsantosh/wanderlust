@@ -4,8 +4,11 @@ services:
      container_name: mongo
      image: mongo:latest
      volumes:
-       - /home/mongo_data:/data/db  # Store MongoDB data in /home/mongo_data on the host
-       #- ./backend/data:/data
+      - /home/mongo_data:/data/db
+     command: bash -c "if mongo wanderlust --eval 'db.posts.countDocuments()' --quiet | grep -q '^0$'; then mongoimport --db wanderlust --collection posts --file /data/sample_posts.json --jsonArray; fi"
+     volumes:
+       - /home/mongo_data:/data/db
+       - ./data:/data  # Ensure the sample JSON file is accessible
      ports:
        - "27017:27017"
 
